@@ -1,0 +1,6 @@
+SQLAlchemy==2.0.23
+mysql-connector-python==8.2.0
+PyMySQL==1.1.0
+python-dotenv==1.0.0
+reportlab==4.0.7
+pandas==2.1.0
