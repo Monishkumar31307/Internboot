@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ exam.title }} - Exam Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">{{ exam.title }}</h3>
+            </div>
+            <div class="card-body">
+                <h5>Description</h5>
+                <p>{{ exam.description }}</p>
+                
+                <hr>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h6><i class="bi bi-clock"></i> Duration</h6>
+                        <p class="lead">{{ exam.duration }} minutes</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <h6><i class="bi bi-trophy"></i> Total Marks</h6>
+                        <p class="lead">{{ exam.total_marks }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <h6><i class="bi bi-question-circle"></i> Number of Questions</h6>
+                        <p class="lead">{{ exam.question_count }}</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <h6><i class="bi bi-check-circle"></i> Passing Marks</h6>
+                        <p class="lead">{{ exam.passing_marks }}</p>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="mb-3">
+                    <h6><i class="bi bi-calendar"></i> Exam Schedule</h6>
+                    <p><strong>Start:</strong> {{ exam.start_date|date:"F d, Y - h:i A" }}</p>
+                    <p><strong>End:</strong> {{ exam.end_date|date:"F d, Y - h:i A" }}</p>
+                </div>
+                
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    <strong>Instructions:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Read each question carefully before answering</li>
+                        <li>You can save answers and come back to edit before final submission</li>
+                        <li>Once time is up, the exam will be automatically submitted</li>
+                        <li>Make sure you have a stable internet connection</li>
+                    </ul>
+                </div>
+                
+                {% if has_attempted %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    You have already attempted this exam.
+                </div>
+                <a href="{% url 'exam_list' %}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Exams
+                </a>
+                {% elif not exam.is_active %}
+                <div class="alert alert-danger">
+                    <i class="bi bi-x-circle"></i>
+                    This exam is not currently active.
+                </div>
+                <a href="{% url 'exam_list' %}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Exams
+                </a>
+                {% else %}
+                <div class="d-grid gap-2">
+                    <a href="{% url 'start_exam' exam.id %}" class="btn btn-success btn-lg">
+                        <i class="bi bi-play-circle"></i> Start Exam
+                    </a>
+                    <a href="{% url 'exam_list' %}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Exams
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
