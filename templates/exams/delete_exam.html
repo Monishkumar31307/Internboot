@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Exam - {{ exam.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0"><i class="bi bi-trash"></i> Delete Exam</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <strong>Warning!</strong> This action cannot be undone.
+                </div>
+                
+                <p>Are you sure you want to delete the following exam?</p>
+                
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5>{{ exam.title }}</h5>
+                        <p class="mb-2">{{ exam.description|truncatewords:20 }}</p>
+                        <p class="mb-0"><small class="text-muted">Questions: {{ exam.question_count }} | Attempts: {{ exam.attempts.count }}</small></p>
+                    </div>
+                </div>
+                
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Yes, Delete Exam
+                        </button>
+                        <a href="{% url 'manage_exams' %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> No, Go Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
