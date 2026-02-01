@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - BlogHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4">Sign In</h2>
+                
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors.0 }}
+                </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
+                </form>
+                
+                <p class="text-center text-muted">
+                    Don't have an account? <a href="{% url 'accounts:register' %}">Sign up here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

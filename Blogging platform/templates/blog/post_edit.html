@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Post: {{ post.title }} - BlogHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-9 mx-auto">
+        <h1 class="mb-4">Edit Post</h1>
+        
+        <form method="post" enctype="multipart/form-data" class="card p-4">
+            {% csrf_token %}
+           {{ form.as_p|crispy }}
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Update Post</button>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - BlogHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4">Create Account</h2>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<div class="text-danger">{{ form.email.errors.0 }}</div>{% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        {{ form.username }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        {{ form.password1 }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        {{ form.password2 }}
+                    </div>
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                    {% endif %}
+                    
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Create Account</button>
+                </form>
+                
+                <p class="text-center text-muted">
+                    Already have an account? <a href="{% url 'accounts:login' %}">Sign in here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+input[type="text"], input[type="email"], input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    margin-top: 0.25rem;
+}
+</style>
+{% endblock %}

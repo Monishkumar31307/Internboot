@@ -1,0 +1,6 @@
+Django==5.2.10
+Pillow==10.1.0
+django-crispy-forms>=2.3
+crispy-bootstrap4==2024.10
+django-ckeditor==6.7.0
+Werkzeug==3.0.1

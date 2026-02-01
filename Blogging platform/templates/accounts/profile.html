@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}My Profile - BlogHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4">My Profile</h1>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Account Information</h5>
+                </div>
+                <div class="card-body">
+                    {{ u_form.as_p|crispy }}
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Profile Details</h5>
+                </div>
+                <div class="card-body">
+                    {{ p_form.as_p|crispy }}
+                </div>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+                <a href="{% url 'blog:home' %}" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

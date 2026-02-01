@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Home - BlogHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% if featured_post %}
+    <div class="col-12 mb-5">
+        <div class="card featured-post">
+            {% if featured_post.featured_image %}
+            <img src="{{ featured_post.featured_image.url }}" alt="{{ featured_post.title }}" class="card-img">
+            {% else %}
+            <div style="height: 400px; background-color: #3498db;"></div>
+            {% endif %}
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+                <h1 class="card-title">{{ featured_post.title }}</h1>
+                <p class="card-text">By <strong>{{ featured_post.author.get_full_name|default:featured_post.author }}</strong> | {{ featured_post.published_at|date:"M d, Y" }}</p>
+                <a href="{{ featured_post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="col-md-8 mb-4">
+        <h2 class="mb-4">Recent Posts</h2>
+        {% for post in recent_posts %}
+        <div class="card post-card">
+            <div class="row g-0">
+                {% if post.featured_image %}
+                <div class="col-md-3">
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="img-fluid rounded-start" style="height: 150px; object-fit: cover;">
+                </div>
+                <div class="col-md-9">
+                {% else %}
+                <div class="col-md-12">
+                {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text text-muted">{{ post.excerpt|truncatewords:20 }}</p>
+                        <p class="small text-muted">
+                            <i class="fas fa-user"></i> {{ post.author.get_full_name|default:post.author }} |
+                            <i class="fas fa-calendar"></i> {{ post.published_at|date:"M d, Y" }} |
+                            <i class="fas fa-eye"></i> {{ post.view_count }} views
+                        </p>
+                        <a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-primary">Read</a>
+                        {% if post.category %}
+                        <a href="{{ post.category.get_absolute_url }}" class="btn btn-sm btn-outline-secondary">{{ post.category.name }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="col-md-4">
+        <div class="sidebar">
+            <h4 class="mb-3"><i class="fas fa-list"></i> Categories</h4>
+            {% if categories %}
+            <ul class="category-list">
+                {% for category in categories %}
+                <li><a href="{{ category.get_absolute_url }}">{{ category.name }} <span class="badge bg-secondary">{{ category.post_count }}</span></a></li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'blog:post_list' %}" class="btn btn-sm btn-outline-primary mt-3">All Categories</a>
+            {% else %}
+            <p class="text-muted">No categories yet</p>
+            {% endif %}
+        </div>
+        
+        <div class="sidebar mt-4">
+            <h4 class="mb-3"><i class="fas fa-tags"></i> Popular Tags</h4>
+            {% if tags %}
+            <div class="mb-3">
+                {% for tag in tags %}
+                <a href="{{ tag.get_absolute_url }}" class="btn btn-sm btn-outline-info mb-2">#{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted">No tags yet</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

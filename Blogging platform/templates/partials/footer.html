@@ -1,0 +1,28 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3"><i class="fas fa-blog"></i> BlogHub</h5>
+                <p>Share your thoughts and ideas with the world. Create, publish, and engage with our community of writers and readers.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'blog:home' %}" class="text-decoration-none text-muted">Home</a></li>
+                    <li><a href="{% url 'blog:post_list' %}" class="text-decoration-none text-muted">All Posts</a></li>
+                    <li><a href="{% url 'accounts:register' %}" class="text-decoration-none text-muted">Register</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3">Follow Us</h5>
+                <a href="#" class="btn btn-sm btn-outline-light me-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-sm btn-outline-light me-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="btn btn-sm btn-outline-light me-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <hr class="border-secondary">
+        <div class="text-center text-muted">
+            <p>&copy; 2026 BlogHub. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

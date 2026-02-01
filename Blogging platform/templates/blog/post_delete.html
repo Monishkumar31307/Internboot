@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Post - BlogHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title mb-4">Delete Post?</h1>
+                <p class="card-text mb-4">Are you sure you want to delete "<strong>{{ post.title }}</strong>"? This action cannot be undone.</p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete Post</button>
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
